@@ -6,8 +6,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -31,6 +37,9 @@ public class LoginActivity extends AppCompatActivity {
     private SignInButton googleSignInButton;
     private static final int RC_SIGN_IN = 1;
     private GoogleApiClient googleApiClient;
+    private TextView pageTitle;
+    public AdView bannerAdLoginPage;
+    private InterstitialAd mInterstitialAd;
 
 
     @Override
@@ -39,14 +48,47 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         initialize();
+//        setTitleFont();
+        setAdView();
         checkExistingUser();
         signIn();
         configureGoogleSignIn();
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-7589353131090263/7052535929");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
 
-    private void initialize(){
+    private void initialize() {
         mAuth = FirebaseAuth.getInstance();
         googleSignInButton = findViewById(R.id.googleSignInButton);
+        bannerAdLoginPage = findViewById(R.id.bannerAdLoginPage);
+        pageTitle = findViewById(R.id.pageTitle);
+    }
+
+//    private void setTitleFont() {
+//        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/Cookie-Regular.ttf");
+//        pageTitle.setTypeface(typeface);
+//    }
+
+    private void setAdView() {
+        MobileAds.initialize(this, "ca-app-pub-7589353131090263~2173945461");
+        AdRequest request = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("5CE8DC1CD7BCEE2D6F7B8E22B0538BAB")
+                .build();
+        bannerAdLoginPage.loadAd(request);
+        bannerAdLoginPage.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                bannerAdLoginPage.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAdFailedToLoad(int error) {
+                bannerAdLoginPage.setVisibility(View.GONE);
+            }
+        });
     }
 
     private void checkExistingUser() {
@@ -54,8 +96,19 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if (firebaseAuth.getCurrentUser() != null) {    // existing user
+                    if (mInterstitialAd.isLoaded()) {
+                        mInterstitialAd.show();
+                    } else {
+                        Toast.makeText(LoginActivity.this, "The interstitial wasn't loaded yet.", Toast.LENGTH_LONG).show();
+                    }
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
+                } else {
+                    if (mInterstitialAd.isLoaded()) {
+                        mInterstitialAd.show();
+                    } else {
+                        Toast.makeText(LoginActivity.this, "The interstitial wasn't loaded yet.", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         };
