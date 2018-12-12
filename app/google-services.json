@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "868574691371",
+    "firebase_url": "https://easymoney-64a7a.firebaseio.com",
+    "project_id": "easymoney-64a7a",
+    "storage_bucket": "easymoney-64a7a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:868574691371:android:0ce5215a3b56490e",
+        "android_client_info": {
+          "package_name": "com.resolvebug.app.easymoney"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "868574691371-1jfkmcoeif8gfkq6fke4p9rakrp5tq5h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.resolvebug.app.easymoney",
+            "certificate_hash": "8ea11091b568e3c7942f396cff3acf548f1dc966"
+          }
+        },
+        {
+          "client_id": "868574691371-7c0d8uricnco5euu8g6ledo294joaog7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXj6LshweE8WqCFgqAgGXCc1nT1PGc91M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "868574691371-7c0d8uricnco5euu8g6ledo294joaog7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
