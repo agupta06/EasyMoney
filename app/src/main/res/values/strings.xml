@@ -1,21 +1,3 @@
 <resources>
     <string name="app_name">EasyMoney</string>
-
-
-    <!--Dummy-->
-    <!--Interstitial Ad-->
-    <!--ca-app-pub-3940256099942544/1033173712-->
-
-    <!--Banner Ad-->
-    <!--ca-app-pub-3940256099942544/6300978111-->
-
-
-    <!--Correct-->
-    <!--Interstitial Ad-->
-    <!--app ID => ca-app-pub-7589353131090263~2173945461-->
-    <!--ad unit ID => ca-app-pub-7589353131090263/7597786243-->
-
-    <!--Banner Ad-->
-    <!--app ID =>     ca-app-pub-7589353131090263~2173945461-->
-    <!--ad unit ID => ca-app-pub-7589353131090263/7052535929-->
 </resources>
