@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--Button Filled-->
+    <style name="Button.Filled" parent="Widget.AppCompat.Button.Borderless.Colored">
+        <item name="android:background">@drawable/bg_btn_filled</item>
+    </style>
+
 </resources>
