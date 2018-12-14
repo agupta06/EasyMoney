@@ -19,6 +19,11 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity implements RewardedVideoAdListener {
@@ -43,15 +48,9 @@ public class MainActivity extends AppCompatActivity implements RewardedVideoAdLi
         setContentView(R.layout.activity_main);
 
         initialize();
-
-        rewardedVideoAd.setRewardedVideoAdListener(this);
         loadChannelsVideoAd();
         setBannerAd();
-
         openPointsRedeemHistoryFragment();
-
-        appLogout();
-
     }
 
     private void openPointsRedeemHistoryFragment() {
@@ -76,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements RewardedVideoAdLi
         rewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
         totalRewardedPoints = findViewById(R.id.totalRewardedPoints);
         referralHistory = findViewById(R.id.referralHistory);
+        rewardedVideoAd.setRewardedVideoAdListener(this);
     }
 
     private void setBannerAd() {
@@ -96,7 +96,6 @@ public class MainActivity extends AppCompatActivity implements RewardedVideoAdLi
             }
         });
 
-// one
         bannerAdMainPageOne.loadAd(request);
         bannerAdMainPageOne.setAdListener(new AdListener() {
             @Override
@@ -110,7 +109,6 @@ public class MainActivity extends AppCompatActivity implements RewardedVideoAdLi
             }
         });
 
-        // two
         bannerAdMainPageTwo.loadAd(request);
         bannerAdMainPageTwo.setAdListener(new AdListener() {
             @Override
@@ -124,7 +122,6 @@ public class MainActivity extends AppCompatActivity implements RewardedVideoAdLi
             }
         });
 
-        // three
         bannerAdMainPageThree.loadAd(request);
         bannerAdMainPageThree.setAdListener(new AdListener() {
             @Override
@@ -138,7 +135,6 @@ public class MainActivity extends AppCompatActivity implements RewardedVideoAdLi
             }
         });
 
-        // four
         bannerAdMainPageFour.loadAd(request);
         bannerAdMainPageFour.setAdListener(new AdListener() {
             @Override
@@ -152,7 +148,6 @@ public class MainActivity extends AppCompatActivity implements RewardedVideoAdLi
             }
         });
 
-        // five
         bannerAdMainPageFive.loadAd(request);
         bannerAdMainPageFive.setAdListener(new AdListener() {
             @Override
@@ -167,32 +162,26 @@ public class MainActivity extends AppCompatActivity implements RewardedVideoAdLi
         });
     }
 
-    private void appLogout() {
-        googleSignOutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-            }
-        });
-        signOut();
-    }
-
-    private void signOut() {
-        authStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if (firebaseAuth.getCurrentUser() == null) {    // user logged out
-                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                    finish();
-                }
-            }
-        };
+    public void appLogout(View view) {
+        FirebaseAuth.getInstance().signOut();
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        GoogleSignInClient googleSignInClient;
+        googleSignInClient = GoogleSignIn.getClient(this, gso);
+        googleSignInClient.signOut()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                        finish();
+                    }
+                });
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        firebaseAuth.addAuthStateListener(authStateListener);
     }
 
     private void loadChannelsVideoAd() {
@@ -286,4 +275,5 @@ public class MainActivity extends AppCompatActivity implements RewardedVideoAdLi
         fragmentTransaction.addToBackStack("container");
         fragmentTransaction.commit();
     }
+
 }

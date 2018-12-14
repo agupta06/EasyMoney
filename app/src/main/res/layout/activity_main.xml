@@ -66,82 +66,112 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <LinearLayout
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/incomeCard"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:orientation="vertical">
+                        android:layout_margin="16dp"
+                        android:foreground="?android:attr/selectableItemBackground">
 
                         <LinearLayout
+                            android:id="@+id/incomeCardLayout"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:orientation="vertical">
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical"
+                            android:padding="16dp">
 
-                            <LinearLayout
+                            <RelativeLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
+                                android:layout_height="wrap_content">
 
-                                <TextView
+                                <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:gravity="center_horizontal"
-                                    android:text="Total Points Earned"
-                                    android:textSize="20sp" />
+                                    android:layout_toLeftOf="@id/cashOut"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
 
-                            </LinearLayout>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:gravity="center_vertical"
+                                        android:text="Points"
+                                        android:textSize="20sp"
+                                        android:textStyle="bold" />
 
-                            <LinearLayout
-                                android:layout_width="30dp"
-                                android:layout_height="2dp"
-                                android:layout_marginTop="10dp"
-                                android:background="#FF0000" />
+                                    <TextView
+                                        android:id="@+id/totalRewardedPoints"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:gravity="center_vertical"
+                                        android:text="200"
+                                        android:textSize="24sp"
+                                        android:textStyle="bold" />
+
+                                </LinearLayout>
+
+                                <Button
+                                    android:id="@+id/cashOut"
+                                    style="@style/Button.Filled"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_marginEnd="16dp"
+                                    android:enabled="true"
+                                    android:onClick="startChannelVideo"
+                                    android:text="CASH OUT"
+                                    android:textColor="#FFFFFF" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="30dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_toLeftOf="@id/refer"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:gravity="center_vertical"
+                                        android:text="Refer &amp; Earn"
+                                        android:textSize="20sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:gravity="center_vertical"
+                                        android:text="200 Points"
+                                        android:textSize="24sp"
+                                        android:textStyle="bold" />
+
+                                </LinearLayout>
+
+                                <Button
+                                    android:id="@+id/refer"
+                                    style="@style/Button.Filled"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_marginEnd="16dp"
+                                    android:enabled="true"
+                                    android:onClick="startChannelVideo"
+                                    android:text="REFER"
+                                    android:textColor="#FFFFFF" />
+
+                            </RelativeLayout>
 
                         </LinearLayout>
 
-                        <android.support.v7.widget.CardView
-                            android:id="@+id/incomeCard"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:foreground="?android:attr/selectableItemBackground">
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:background="@android:color/darker_gray" />
-
-                            <LinearLayout
-                                android:id="@+id/incomeCardLayout"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center_horizontal"
-                                android:orientation="horizontal"
-                                android:padding="20dp">
-
-                                <TextView
-                                    android:id="@+id/totalRewardedPoints"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:layout_margin="5dp"
-                                    android:gravity="center_vertical"
-                                    android:text="100"
-                                    android:textSize="30sp"
-                                    android:textStyle="bold" />
-
-
-                            </LinearLayout>
-
-                        </android.support.v7.widget.CardView>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@android:color/darker_gray" />
-
-                    </LinearLayout>
+                    </android.support.v7.widget.CardView>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -180,30 +210,34 @@
                         <android.support.v7.widget.CardView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:focusable="true"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
                             android:foreground="?android:attr/selectableItemBackground">
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:background="@android:color/darker_gray" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="center_horizontal"
                                 android:orientation="horizontal"
-                                android:padding="10dp"
-                                android:weightSum="2">
+                                android:padding="16dp"
+                                android:weightSum="3">
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/ic_video_camera" />
 
                                 <TextView
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
+                                    android:layout_marginEnd="16dp"
                                     android:layout_weight="1"
-                                    android:text="Click on Channel 1 to watch video and earn money"
-                                    android:textStyle="italic" />
+                                    android:gravity="center"
+                                    android:text="VIDEO CHANNEL #1"
+                                    android:textStyle="bold" />
 
                                 <Button
                                     android:id="@+id/channelOne"
@@ -213,85 +247,65 @@
                                     android:layout_weight="1"
                                     android:enabled="true"
                                     android:onClick="startChannelVideo"
-                                    android:text="Channel 1"
+                                    android:text="WATCH VIDEO"
                                     android:textColor="#FFFFFF" />
 
                             </LinearLayout>
 
                         </android.support.v7.widget.CardView>
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="0.5dp"
-                            android:background="@android:color/darker_gray" />
-
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="0.5dp"
-                            android:background="@android:color/darker_gray" />
-
-                        <LinearLayout
+                        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/bannerAdMainPageOne"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:orientation="horizontal"
-                            android:padding="10dp">
-
-                            <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-                                android:id="@+id/bannerAdMainPageOne"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                ads:adSize="LARGE_BANNER"
-                                ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="0.5dp"
-                            android:background="@android:color/darker_gray" />
+                            ads:adSize="LARGE_BANNER"
+                            ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
 
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
                         <android.support.v7.widget.CardView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:focusable="true"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
                             android:foreground="?android:attr/selectableItemBackground">
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="0.5dp"
-                                android:background="@android:color/darker_gray" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="center_horizontal"
                                 android:orientation="horizontal"
-                                android:padding="10dp"
-                                android:weightSum="2">
+                                android:padding="16dp"
+                                android:weightSum="3">
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/ic_video_camera" />
 
                                 <TextView
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
+                                    android:layout_marginEnd="16dp"
                                     android:layout_weight="1"
-                                    android:text="Click on Channel 2 to watch video and earn money"
-                                    android:textStyle="italic" />
+                                    android:gravity="center"
+                                    android:text="VIDEO CHANNEL #2"
+                                    android:textStyle="bold" />
 
                                 <Button
                                     android:id="@+id/channelTwo"
@@ -301,85 +315,65 @@
                                     android:layout_weight="1"
                                     android:enabled="true"
                                     android:onClick="startChannelVideo"
-                                    android:text="Channel 2"
+                                    android:text="WATCH VIDEO"
                                     android:textColor="#FFFFFF" />
 
                             </LinearLayout>
 
                         </android.support.v7.widget.CardView>
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="0.5dp"
-                            android:background="@android:color/darker_gray" />
-
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="0.5dp"
-                            android:background="@android:color/darker_gray" />
-
-                        <LinearLayout
+                        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/bannerAdMainPageTwo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:orientation="horizontal"
-                            android:padding="10dp">
-
-                            <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-                                android:id="@+id/bannerAdMainPageTwo"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                ads:adSize="LARGE_BANNER"
-                                ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="0.5dp"
-                            android:background="@android:color/darker_gray" />
+                            ads:adSize="LARGE_BANNER"
+                            ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
 
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
                         <android.support.v7.widget.CardView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:focusable="true"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
                             android:foreground="?android:attr/selectableItemBackground">
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="0.5dp"
-                                android:background="@android:color/darker_gray" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="center_horizontal"
                                 android:orientation="horizontal"
-                                android:padding="10dp"
-                                android:weightSum="2">
+                                android:padding="16dp"
+                                android:weightSum="3">
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/ic_video_camera" />
 
                                 <TextView
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
+                                    android:layout_marginEnd="16dp"
                                     android:layout_weight="1"
-                                    android:text="Click on Channel 3 to watch video and earn money"
-                                    android:textStyle="italic" />
+                                    android:gravity="center"
+                                    android:text="VIDEO CHANNEL #3"
+                                    android:textStyle="bold" />
 
                                 <Button
                                     android:id="@+id/channelThree"
@@ -389,85 +383,65 @@
                                     android:layout_weight="1"
                                     android:enabled="true"
                                     android:onClick="startChannelVideo"
-                                    android:text="Channel 3"
+                                    android:text="WATCH VIDEO"
                                     android:textColor="#FFFFFF" />
 
                             </LinearLayout>
 
                         </android.support.v7.widget.CardView>
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="0.5dp"
-                            android:background="@android:color/darker_gray" />
-
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="0.5dp"
-                            android:background="@android:color/darker_gray" />
-
-                        <LinearLayout
+                        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/bannerAdMainPageThree"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:orientation="horizontal"
-                            android:padding="10dp">
-
-                            <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-                                android:id="@+id/bannerAdMainPageThree"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                ads:adSize="LARGE_BANNER"
-                                ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="0.5dp"
-                            android:background="@android:color/darker_gray" />
+                            ads:adSize="LARGE_BANNER"
+                            ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
 
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
                         <android.support.v7.widget.CardView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:focusable="true"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
                             android:foreground="?android:attr/selectableItemBackground">
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="0.5dp"
-                                android:background="@android:color/darker_gray" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="center_horizontal"
                                 android:orientation="horizontal"
-                                android:padding="10dp"
-                                android:weightSum="2">
+                                android:padding="16dp"
+                                android:weightSum="3">
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/ic_video_camera" />
 
                                 <TextView
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
+                                    android:layout_marginEnd="16dp"
                                     android:layout_weight="1"
-                                    android:text="Click on Channel 4 to watch video and earn money"
-                                    android:textStyle="italic" />
+                                    android:gravity="center"
+                                    android:text="VIDEO CHANNEL #4"
+                                    android:textStyle="bold" />
 
                                 <Button
                                     android:id="@+id/channelFour"
@@ -477,85 +451,65 @@
                                     android:layout_weight="1"
                                     android:enabled="true"
                                     android:onClick="startChannelVideo"
-                                    android:text="Channel 4"
+                                    android:text="WATCH VIDEO"
                                     android:textColor="#FFFFFF" />
 
                             </LinearLayout>
 
                         </android.support.v7.widget.CardView>
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="0.5dp"
-                            android:background="@android:color/darker_gray" />
-
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="0.5dp"
-                            android:background="@android:color/darker_gray" />
-
-                        <LinearLayout
+                        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/bannerAdMainPageFour"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:orientation="horizontal"
-                            android:padding="10dp">
-
-                            <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-                                android:id="@+id/bannerAdMainPageFour"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                ads:adSize="LARGE_BANNER"
-                                ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="0.5dp"
-                            android:background="@android:color/darker_gray" />
+                            ads:adSize="LARGE_BANNER"
+                            ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
 
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
                         <android.support.v7.widget.CardView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:focusable="true"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
                             android:foreground="?android:attr/selectableItemBackground">
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="0.5dp"
-                                android:background="@android:color/darker_gray" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="center_horizontal"
                                 android:orientation="horizontal"
-                                android:padding="10dp"
-                                android:weightSum="2">
+                                android:padding="16dp"
+                                android:weightSum="3">
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/ic_video_camera" />
 
                                 <TextView
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
+                                    android:layout_marginEnd="16dp"
                                     android:layout_weight="1"
-                                    android:text="Click on Channel 5 to watch video and earn money"
-                                    android:textStyle="italic" />
+                                    android:gravity="center"
+                                    android:text="VIDEO CHANNEL #5"
+                                    android:textStyle="bold" />
 
                                 <Button
                                     android:id="@+id/channelFive"
@@ -565,50 +519,26 @@
                                     android:layout_weight="1"
                                     android:enabled="true"
                                     android:onClick="startChannelVideo"
-                                    android:text="Channel 5"
+                                    android:text="WATCH VIDEO"
                                     android:textColor="#FFFFFF" />
 
                             </LinearLayout>
 
                         </android.support.v7.widget.CardView>
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@android:color/darker_gray" />
-
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="0.5dp"
-                            android:background="@android:color/darker_gray" />
-
-                        <LinearLayout
+                        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/bannerAdMainPageFive"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:orientation="horizontal"
-                            android:padding="10dp">
-
-                            <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-                                android:id="@+id/bannerAdMainPageFive"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                ads:adSize="LARGE_BANNER"
-                                ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="0.5dp"
-                            android:background="@android:color/darker_gray" />
+                            ads:adSize="LARGE_BANNER"
+                            ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
 
                     </LinearLayout>
 
@@ -620,6 +550,7 @@
                         android:layout_marginTop="30dp"
                         android:layout_weight="1"
                         android:enabled="true"
+                        android:onClick="appLogout"
                         android:text="Sign Out"
                         android:textColor="#FFFFFF" />
 
