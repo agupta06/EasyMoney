@@ -6,7 +6,7 @@
     android:background="#FFFFFF"
     android:clickable="true"
     android:focusable="true"
-    tools:context=".PointsRedeemHistoryFragment">
+    tools:context=".HistoryActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -24,10 +24,10 @@
                 android:elevation="2dp">
 
                 <android.support.v7.widget.Toolbar
+                    android:background="@drawable/gradient_background"
                     android:id="@+id/home_toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary">
+                    android:layout_height="wrap_content">
 
                     <ImageView
                         android:id="@+id/backButton"
@@ -44,6 +44,15 @@
                         android:text="@string/app_name"
                         android:textColor="#FFFFFF"
                         android:textSize="30sp" />
+
+                    <ImageView
+                        android:id="@+id/referralHistory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:onClick="appLogout"
+                        android:layout_marginRight="16dp"
+                        android:src="@drawable/ic_logout_or_send_square_with_right_arrow_interface_symbol" />
 
                 </android.support.v7.widget.Toolbar>
 
@@ -113,7 +122,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             ads:adSize="LARGE_BANNER"
-                            ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
+                            ads:adUnitId="ca-app-pub-7589353131090263/1975802200" />
 
                     </LinearLayout>
 
@@ -136,7 +145,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             ads:adSize="LARGE_BANNER"
-                            ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
+                            ads:adUnitId="ca-app-pub-7589353131090263/3657970412" />
 
                     </LinearLayout>
 
@@ -159,7 +168,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             ads:adSize="LARGE_BANNER"
-                            ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
+                            ads:adUnitId="ca-app-pub-7589353131090263/9122050089" />
 
                     </LinearLayout>
 
@@ -177,7 +186,7 @@
             android:layout_alignParentBottom="true"
             android:layout_gravity="bottom"
             ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
+            ads:adUnitId="ca-app-pub-7589353131090263/8950659699" />
 
     </RelativeLayout>
 

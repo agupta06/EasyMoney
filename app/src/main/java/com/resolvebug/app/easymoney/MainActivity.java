@@ -1,14 +1,10 @@
 package com.resolvebug.app.easymoney;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,18 +15,9 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity implements RewardedVideoAdListener {
 
-    private Button googleSignOutButton;
-    private FirebaseAuth.AuthStateListener authStateListener;
-    private FirebaseAuth firebaseAuth;
     public AdView bannerAdMainPageBottom;
     public AdView bannerAdMainPageOne;
     public AdView bannerAdMainPageTwo;
@@ -41,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements RewardedVideoAdLi
     private TextView totalRewardedPoints;
     private int rewardAmount = 0;
     private ImageView referralHistory;
+    private TextView pageTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,31 +39,37 @@ public class MainActivity extends AppCompatActivity implements RewardedVideoAdLi
         loadChannelsVideoAd();
         setBannerAd();
         openPointsRedeemHistoryFragment();
+        setTitleFont();
     }
 
     private void openPointsRedeemHistoryFragment() {
         referralHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openAddTransactionFragment();
+                openHistoryActivity();
             }
         });
     }
 
     private void initialize() {
-        googleSignOutButton = findViewById(R.id.googleSignOutButton);
-        firebaseAuth = FirebaseAuth.getInstance();
         bannerAdMainPageBottom = findViewById(R.id.bannerAdMainPageBottom);
         bannerAdMainPageOne = findViewById(R.id.bannerAdMainPageOne);
         bannerAdMainPageTwo = findViewById(R.id.bannerAdMainPageTwo);
         bannerAdMainPageThree = findViewById(R.id.bannerAdMainPageThree);
         bannerAdMainPageFour = findViewById(R.id.bannerAdMainPageFour);
         bannerAdMainPageFive = findViewById(R.id.bannerAdMainPageFive);
-        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+//        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");     // Test App ID
+        MobileAds.initialize(this, "ca-app-pub-7589353131090263~4287498139");   // Correct App ID
         rewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
         totalRewardedPoints = findViewById(R.id.totalRewardedPoints);
         referralHistory = findViewById(R.id.referralHistory);
         rewardedVideoAd.setRewardedVideoAdListener(this);
+        pageTitle = findViewById(R.id.pageTitle);
+    }
+
+    private void setTitleFont() {
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/CaviarDreams.ttf");
+        pageTitle.setTypeface(typeface);
     }
 
     private void setBannerAd() {
@@ -162,34 +156,18 @@ public class MainActivity extends AppCompatActivity implements RewardedVideoAdLi
         });
     }
 
-    public void appLogout(View view) {
-        FirebaseAuth.getInstance().signOut();
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-        GoogleSignInClient googleSignInClient;
-        googleSignInClient = GoogleSignIn.getClient(this, gso);
-        googleSignInClient.signOut()
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                        finish();
-                    }
-                });
-    }
-
     @Override
     protected void onStart() {
         super.onStart();
     }
 
     private void loadChannelsVideoAd() {
-        loadRewardedVideoAd("ca-app-pub-3940256099942544/5224354917");  // channel 1
-        loadRewardedVideoAd("ca-app-pub-3940256099942544/5224354917");  // channel 2
-        loadRewardedVideoAd("ca-app-pub-3940256099942544/5224354917");  // channel 3
-        loadRewardedVideoAd("ca-app-pub-3940256099942544/5224354917");  // channel 4
-        loadRewardedVideoAd("ca-app-pub-3940256099942544/5224354917");  // channel 5
+//        loadRewardedVideoAd("ca-app-pub-3940256099942544/5224354917");  // test ad unit id
+        loadRewardedVideoAd("ca-app-pub-7589353131090263/8820148825");  // Correct Rewarded1
+        loadRewardedVideoAd("ca-app-pub-7589353131090263/6628389319");  // Correct Rewarded2
+        loadRewardedVideoAd("ca-app-pub-7589353131090263/9431357061");  // Correct Rewarded3
+        loadRewardedVideoAd("ca-app-pub-7589353131090263/6422050346");  // Correct Rewarded4
+        loadRewardedVideoAd("ca-app-pub-7589353131090263/9937078936");  // Correct Rewarded5
     }
 
     private void loadRewardedVideoAd(String adUnit) {
@@ -267,13 +245,8 @@ public class MainActivity extends AppCompatActivity implements RewardedVideoAdLi
         super.onDestroy();
     }
 
-    private void openAddTransactionFragment() {
-        Fragment fragment = new PointsRedeemHistoryFragment();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.container, fragment);
-        fragmentTransaction.addToBackStack("container");
-        fragmentTransaction.commit();
+    private void openHistoryActivity() {
+        startActivity(new Intent(MainActivity.this, HistoryActivity.class));
     }
 
 }

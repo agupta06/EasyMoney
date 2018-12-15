@@ -1,11 +1,12 @@
 package com.resolvebug.app.easymoney;
 
 import android.content.Intent;
-import android.net.Uri;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
@@ -28,6 +29,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import java.security.SecureRandom;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
@@ -36,6 +45,9 @@ public class LoginActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 1;
     private GoogleApiClient googleApiClient;
     public AdView bannerAdLoginPage;
+    private RetrofitApiInterface retrofitApiInterface;
+    private TextView pageTitle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         initialize();
+        setTitleFont();
         setBannerAd();
         checkExistingUser();
         signIn();
@@ -53,7 +66,13 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         googleSignInButton = findViewById(R.id.googleSignInButton);
         bannerAdLoginPage = findViewById(R.id.bannerAdLoginPage);
-        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+        pageTitle = findViewById(R.id.pageTitle);
+        MobileAds.initialize(this, "ca-app-pub-7589353131090263~4287498139");
+    }
+
+    private void setTitleFont() {
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/CaviarDreams.ttf");
+        pageTitle.setTypeface(typeface);
     }
 
     private void setBannerAd() {
@@ -170,12 +189,39 @@ public class LoginActivity extends AppCompatActivity {
     private void updateUI(FirebaseUser user) {
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
         if (acct != null) {
-            String personName = acct.getDisplayName();
             String personEmail = acct.getEmail();
-            String personId = acct.getId();
-            Uri personPhoto = acct.getPhotoUrl();
-            String personGivenName = acct.getGivenName();
-            String personFamilyName = acct.getFamilyName();
+            saveUserDetails(personEmail, getAlphaNumeric(6), "asd123");
         }
+    }
+
+    private void saveUserDetails(String email, String referralCode, String appliedReferralCode) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(retrofitApiInterface.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        retrofitApiInterface = retrofit.create(RetrofitApiInterface.class);
+        UserDetailsPojo userDetailsPojo = new UserDetailsPojo(email, referralCode, appliedReferralCode);
+        Call<UserDetailsPojo> call = retrofitApiInterface.saveUserDetails(userDetailsPojo);
+        call.enqueue(new Callback<UserDetailsPojo>() {
+            @Override
+            public void onResponse(Call<UserDetailsPojo> call, Response<UserDetailsPojo> response) {
+                Toast.makeText(LoginActivity.this, "Retrofit Success : ", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(Call<UserDetailsPojo> call, Throwable t) {
+                Toast.makeText(LoginActivity.this, "Retrofit Error : " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public String getAlphaNumeric(int len) {
+        char[] ch = "0123456789abcdefghijklmnopqrstuvwxyz".toCharArray();
+        char[] c = new char[len];
+        SecureRandom random = new SecureRandom();
+        for (int i = 0; i < len; i++) {
+            c[i] = ch[random.nextInt(ch.length)];
+        }
+        return new String(c);
     }
 }
