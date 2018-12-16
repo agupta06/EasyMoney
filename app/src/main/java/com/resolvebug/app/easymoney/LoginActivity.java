@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
@@ -47,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
     public AdView bannerAdLoginPage;
     private RetrofitApiInterface retrofitApiInterface;
     private TextView pageTitle;
-
+private TextInputEditText appliedReferralCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
         bannerAdLoginPage = findViewById(R.id.bannerAdLoginPage);
         pageTitle = findViewById(R.id.pageTitle);
         MobileAds.initialize(this, "ca-app-pub-7589353131090263~4287498139");
+        appliedReferralCode = findViewById(R.id.appliedReferralCode);
     }
 
     private void setTitleFont() {
@@ -190,7 +192,7 @@ public class LoginActivity extends AppCompatActivity {
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
         if (acct != null) {
             String personEmail = acct.getEmail();
-            saveUserDetails(personEmail, getAlphaNumeric(6), "asd123");
+            saveUserDetails(personEmail, getAlphaNumeric(6), appliedReferralCode.getText().toString());
         }
     }
 

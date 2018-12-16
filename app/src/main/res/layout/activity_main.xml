@@ -88,6 +88,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:textColor="@color/textColor"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
                                     android:gravity="center_vertical"
@@ -96,6 +97,7 @@
                                     android:textStyle="bold" />
 
                                 <TextView
+                                    style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
                                     android:id="@+id/totalRewardedPoints"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
@@ -114,7 +116,7 @@
                                 android:layout_alignParentEnd="true"
                                 android:layout_marginEnd="16dp"
                                 android:enabled="true"
-                                android:onClick="startChannelVideo"
+                                android:onClick="openCashOutDialog"
                                 android:text="CASH OUT"
                                 android:textColor="#FFFFFF" />
 
@@ -133,6 +135,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:textColor="@color/textColor"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
                                     android:gravity="center_vertical"
@@ -141,6 +144,7 @@
                                     android:textStyle="bold" />
 
                                 <TextView
+                                    style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
                                     android:gravity="center_vertical"
@@ -186,6 +190,8 @@
                             android:orientation="vertical">
 
                             <TextView
+                                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                                android:textColor="@color/textColor"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center_horizontal"
@@ -198,7 +204,7 @@
                             android:layout_width="30dp"
                             android:layout_height="2dp"
                             android:layout_marginTop="10dp"
-                            android:background="#FF0000" />
+                            android:background="@color/colorAccent" />
 
                     </LinearLayout>
 
@@ -225,6 +231,7 @@
                                 android:src="@drawable/ic_video_camera" />
 
                             <TextView
+                                android:textColor="@color/textColor"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -235,7 +242,6 @@
                                 android:textStyle="bold" />
 
                             <Button
-                                android:id="@+id/channelOne"
                                 style="@style/Button.Filled"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -293,6 +299,7 @@
                                 android:src="@drawable/ic_video_camera" />
 
                             <TextView
+                                android:textColor="@color/textColor"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -303,7 +310,6 @@
                                 android:textStyle="bold" />
 
                             <Button
-                                android:id="@+id/channelTwo"
                                 style="@style/Button.Filled"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -361,6 +367,7 @@
                                 android:src="@drawable/ic_video_camera" />
 
                             <TextView
+                                android:textColor="@color/textColor"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -371,7 +378,6 @@
                                 android:textStyle="bold" />
 
                             <Button
-                                android:id="@+id/channelThree"
                                 style="@style/Button.Filled"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -429,6 +435,7 @@
                                 android:src="@drawable/ic_video_camera" />
 
                             <TextView
+                                android:textColor="@color/textColor"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -439,7 +446,6 @@
                                 android:textStyle="bold" />
 
                             <Button
-                                android:id="@+id/channelFour"
                                 style="@style/Button.Filled"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -497,6 +503,7 @@
                                 android:src="@drawable/ic_video_camera" />
 
                             <TextView
+                                android:textColor="@color/textColor"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -507,7 +514,6 @@
                                 android:textStyle="bold" />
 
                             <Button
-                                android:id="@+id/channelFive"
                                 style="@style/Button.Filled"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"

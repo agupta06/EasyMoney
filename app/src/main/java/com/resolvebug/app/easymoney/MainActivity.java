@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -16,7 +17,7 @@ import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
-public class MainActivity extends AppCompatActivity implements RewardedVideoAdListener {
+public class MainActivity extends AppCompatActivity implements RewardedVideoAdListener, CashOutDialog.CashOutDialogListener {
 
     public AdView bannerAdMainPageBottom;
     public AdView bannerAdMainPageOne;
@@ -249,4 +250,15 @@ public class MainActivity extends AppCompatActivity implements RewardedVideoAdLi
         startActivity(new Intent(MainActivity.this, HistoryActivity.class));
     }
 
+
+    public void openCashOutDialog(View view) {
+        CashOutDialog cashOutDialog = new CashOutDialog();
+        cashOutDialog.show(getSupportFragmentManager(), "Cash Out Dialog");
+    }
+
+    @Override
+    public void fetchPaypalEmail(String paypalEmail) {
+        Toast.makeText(MainActivity.this, "Paypal Email : " + paypalEmail, Toast.LENGTH_LONG).show();
+
+    }
 }

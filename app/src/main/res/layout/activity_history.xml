@@ -80,6 +80,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
@@ -93,9 +94,10 @@
                     android:layout_height="2dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="10dp"
-                    android:background="#FF0000" />
+                    android:background="@color/colorAccent" />
 
                 <TextView
+                    android:textColor="@color/textColor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
