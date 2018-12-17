@@ -1,5 +1,6 @@
 package com.resolvebug.app.easymoney;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -17,6 +18,12 @@ import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class MainActivity extends AppCompatActivity implements RewardedVideoAdListener, CashOutDialog.CashOutDialogListener {
 
     public AdView bannerAdMainPageBottom;
@@ -30,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements RewardedVideoAdLi
     private int rewardAmount = 0;
     private ImageView referralHistory;
     private TextView pageTitle;
+    private RetrofitApiInterface retrofitApiInterface;
+    private UserDetailsPojo userDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements RewardedVideoAdLi
         setContentView(R.layout.activity_main);
 
         initialize();
+        getUserDetails("cartergupta@gmail.com");
         loadChannelsVideoAd();
         setBannerAd();
         openPointsRedeemHistoryFragment();
@@ -210,7 +220,7 @@ public class MainActivity extends AppCompatActivity implements RewardedVideoAdLi
     @Override
     public void onRewarded(RewardItem rewardItem) {
         rewardAmount += rewardItem.getAmount();
-        totalRewardedPoints.setText(rewardAmount);
+        totalRewardedPoints.setText("hello");
     }
 
     @Override
@@ -259,6 +269,47 @@ public class MainActivity extends AppCompatActivity implements RewardedVideoAdLi
     @Override
     public void fetchPaypalEmail(String paypalEmail) {
         Toast.makeText(MainActivity.this, "Paypal Email : " + paypalEmail, Toast.LENGTH_LONG).show();
-
     }
+
+    public void openReferralDialog(View view) {
+        ReferralDialog referralDialog = new ReferralDialog();
+        Bundle bundle = new Bundle();
+        bundle.putString("referralCode", userDetails.getReferralCode());
+        referralDialog.setArguments(bundle);
+        referralDialog.show(getSupportFragmentManager(), "Referral Dialog");
+    }
+
+    private void getUserDetails(String email) {
+        ProgressDialog progress = new ProgressDialog(this);
+        progress.setTitle("Loading ...");
+//        progress.setMessage("Please wait till the video is loaded...");
+        progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+        progress.show();
+        userDetails = new UserDetailsPojo();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(retrofitApiInterface.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        retrofitApiInterface = retrofit.create(RetrofitApiInterface.class);
+        UserDetailsPojo userDetailsPojo = new UserDetailsPojo(email);
+        Call<UserDetailsPojo> call = retrofitApiInterface.getUserDetails(userDetailsPojo);
+        call.enqueue(new Callback<UserDetailsPojo>() {
+            @Override
+            public void onResponse(Call<UserDetailsPojo> call, Response<UserDetailsPojo> response) {
+                totalRewardedPoints.setText(response.body().getPointsEarned());
+                userDetails.setEmail(response.body().getEmail());
+                userDetails.setJoiningBonusGiven(response.body().getJoiningBonusGiven());
+                userDetails.setAppliedReferralCode(response.body().getAppliedReferralCode());
+                userDetails.setPaypalEmail(response.body().getPaypalEmail());
+                userDetails.setPointsEarned(response.body().getPointsEarned());
+                userDetails.setReferralCode(response.body().getReferralCode());
+            }
+
+            @Override
+            public void onFailure(Call<UserDetailsPojo> call, Throwable t) {
+            }
+        });
+        progress.dismiss();
+    }
+
 }

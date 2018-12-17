@@ -3,10 +3,11 @@ package com.resolvebug.app.easymoney;
 public class UserDetailsPojo {
 
     private String email;
-    private String phoneNumber;
+    private String paypalEmail;
     private String referralCode;
     private String appliedReferralCode;
-    private String referralCount;
+    private String pointsEarned;
+    private String joiningBonusGiven;
 
     public String getEmail() {
         return email;
@@ -16,12 +17,12 @@ public class UserDetailsPojo {
         this.email = email;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPaypalEmail() {
+        return paypalEmail;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPaypalEmail(String paypalEmail) {
+        this.paypalEmail = paypalEmail;
     }
 
     public String getReferralCode() {
@@ -40,14 +41,6 @@ public class UserDetailsPojo {
         this.appliedReferralCode = appliedReferralCode;
     }
 
-    public String getReferralCount() {
-        return referralCount;
-    }
-
-    public void setReferralCount(String referralCount) {
-        this.referralCount = referralCount;
-    }
-
     public String getPointsEarned() {
         return pointsEarned;
     }
@@ -56,20 +49,33 @@ public class UserDetailsPojo {
         this.pointsEarned = pointsEarned;
     }
 
-    private String pointsEarned;
+    public String getJoiningBonusGiven() {
+        return joiningBonusGiven;
+    }
 
-    public UserDetailsPojo(String email, String phoneNumber, String referralCode, String appliedReferralCode, String referralCount, String pointsEarned) {
+    public void setJoiningBonusGiven(String joiningBonusGiven) {
+        this.joiningBonusGiven = joiningBonusGiven;
+    }
+
+    public UserDetailsPojo(String email, String paypalEmail, String referralCode, String appliedReferralCode, String pointsEarned, String joiningBonusGiven) {
         this.email = email;
-        this.phoneNumber = phoneNumber;
+        this.paypalEmail = paypalEmail;
         this.referralCode = referralCode;
         this.appliedReferralCode = appliedReferralCode;
-        this.referralCount = referralCount;
         this.pointsEarned = pointsEarned;
+        this.joiningBonusGiven = joiningBonusGiven;
     }
 
     public UserDetailsPojo(String email, String referralCode, String appliedReferralCode) {
         this.email = email;
         this.referralCode = referralCode;
         this.appliedReferralCode = appliedReferralCode;
+    }
+
+    public UserDetailsPojo(String email) {
+        this.email = email;
+    }
+
+    public UserDetailsPojo() {
     }
 }

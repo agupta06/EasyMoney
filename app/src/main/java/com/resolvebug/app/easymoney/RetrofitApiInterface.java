@@ -6,8 +6,11 @@ import retrofit2.http.POST;
 
 public interface RetrofitApiInterface {
 
-    public String BASE_URL = "https://resolvebug.com/earnmoney/api/";
+    String BASE_URL = "https://resolvebug.com/earnmoney/api/";
 
     @POST("create/CreateUser.php")
     Call<UserDetailsPojo> saveUserDetails(@Body UserDetailsPojo post);
+
+    @POST("read/GetUserDetails.php")
+    Call<UserDetailsPojo> getUserDetails(@Body UserDetailsPojo post);
 }

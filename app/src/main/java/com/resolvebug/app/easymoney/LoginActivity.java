@@ -218,7 +218,7 @@ private TextInputEditText appliedReferralCode;
     }
 
     public String getAlphaNumeric(int len) {
-        char[] ch = "0123456789abcdefghijklmnopqrstuvwxyz".toCharArray();
+        char[] ch = "123456789abcdefghjkmnpqrstuvwxyz".toCharArray();
         char[] c = new char[len];
         SecureRandom random = new SecureRandom();
         for (int i = 0; i < len; i++) {
@@ -226,4 +226,5 @@ private TextInputEditText appliedReferralCode;
         }
         return new String(c);
     }
+
 }
